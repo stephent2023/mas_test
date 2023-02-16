@@ -20,18 +20,18 @@ cursor = conn.cursor()
 @app.route("/")
 def pagehome():
     try:
-        cursor.execute('INSERT INTO LoginEvents(Hostname,Username,Timestamp,Elapsed) VALUES ("Joe Weaver","Weaverbeaver","2008-11-11",1887)')
+        cursor.execute('INSERT INTO LoginEvents(Hostname,Username,Timestamp,Elapsed) VALUES ("jweavoid","Weaverbeaver","2008-10-11",1990)')
         conn.commit()
         cursor.close()
         return "<h1>Hello world<h1>"
     except:
-        return render_template('frog.html')
+        return "<h1>Already there!!<h1>"
 
 @app.route("/LoginEvents")
 def tableview():
     cursor.execute('SELECT * FROM LoginEvents')
     results = cursor.fetchall()
-    return render_template('index.html', results=results)
+    return "<h1>Selected!!<h1>"
 
 if __name__=="__main__":
-    app.run(host="0.0.0.0", port=8080)
+    app.run(port=8081)
