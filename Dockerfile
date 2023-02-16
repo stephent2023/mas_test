@@ -15,8 +15,8 @@ COPY . .
 # Environment variables
 ENV PYTHONUNBUFFERED 1
 
-# EXPOSE port 8000 to allow communication to/from server
-EXPOSE 8001
+# EXPOSE port 8081 to allow communication to/from server
+EXPOSE 8081
 STOPSIGNAL SIGINT
 
 ENTRYPOINT ["python"]
