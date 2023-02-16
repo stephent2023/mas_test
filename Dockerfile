@@ -3,8 +3,8 @@
 FROM registry.access.redhat.com/ubi9/python-39:latest
 
 # Set up directories
-RUN mkdir /application
-WORKDIR /application
+RUN mkdir /projects
+WORKDIR /projects
 
 # Copy python dependencies and install these
 COPY requirements.txt .
