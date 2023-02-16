@@ -5,7 +5,6 @@ EXPOSE 8080/tcp
 ENV FLASK_PORT=8080
 
 # Set up directories
-RUN mkdir /application
 WORKDIR /application
 
 # Copy python dependencies and install these
