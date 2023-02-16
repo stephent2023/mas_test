@@ -1,6 +1,6 @@
 
 # Inherit python image
-FROM python:3.6-slim
+FROM registry.access.redhat.com/ubi9/python-39:latest
 
 # Set up directories
 RUN mkdir /application
