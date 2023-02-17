@@ -13,6 +13,7 @@ RUN pip install -r requirements.txt
 #RUN venv/Scripts/activate
 RUN pip install flask_restful
 RUN pip install flask-mysql
+RUN pip install flask-restx
 # Copy the rest of the applicationssd
 COPY . .
 
