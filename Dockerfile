@@ -24,4 +24,4 @@ EXPOSE 8081
 STOPSIGNAL SIGINT
 
 ENTRYPOINT ["python"]
-CMD ["hellowrldflask.py"]
+CMD ["read-test.py"]
