@@ -25,4 +25,4 @@ EXPOSE 8081
 STOPSIGNAL SIGINT
 
 ENTRYPOINT ["python"]
-CMD ["read-test.py"]
+CMD ["test.py"]
