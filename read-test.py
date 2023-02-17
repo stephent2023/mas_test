@@ -8,10 +8,10 @@ app = Flask(__name__)
 api = Api(app)
 
 mysql = MySQL(app)
-app.config['MYSQL_DATABASE_USER'] = 'masteradmin'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'H4br)+tU8m'
-app.config['MYSQL_DATABASE_DB'] = 'Monitoring'
-app.config['MYSQL_DATABASE_HOST'] = 'system.cjufabmrbwai.eu-west-2.rds.amazonaws.com'
+app.config['MYSQL_DATABASE_USER'] = 'master'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'Badminton!'
+app.config['MYSQL_DATABASE_DB'] = 'monitoring'
+app.config['MYSQL_DATABASE_HOST'] = 'grafanards.crgp9ayzq9mq.eu-west-2.rds.amazonaws.com'
 app.config['MYSQL_DATABASE_PORT'] = 3306
 mysql.init_app(app)
 conn = mysql.connect()
