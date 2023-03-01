@@ -284,3 +284,5 @@ class DeviceStatus(Resource):
 
 if __name__=="__main__":
     app.run(port=8081)
+    
+Test = "test"
