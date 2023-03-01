@@ -7,12 +7,18 @@ import json
 app = Flask(__name__)
 api = Api(app)
 
+passwordtxt = open("secrets.txt","r")
+password = passwordtxt.read()
+with open('secrets.txt') as passfile:
+    lines = [line.rstrip('\n') for line in passfile]
+
 mysql = MySQL()
-app.config['MYSQL_DATABASE_USER'] = 'masteradmin'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'H4br)+tU8m'
-app.config['MYSQL_DATABASE_DB'] = 'Monitoring'
-app.config['MYSQL_DATABASE_HOST'] = 'system.cjufabmrbwai.eu-west-2.rds.amazonaws.com'
-app.config['MYSQL_DATABASE_PORT'] = 3306
+app.config['MYSQL_DATABASE_USER'] = lines[0]
+app.config['MYSQL_DATABASE_PASSWORD'] = lines[1]
+app.config['MYSQL_DATABASE_DB'] = lines[2]
+app.config['MYSQL_DATABASE_HOST'] = lines[3]
+app.config['MYSQL_DATABASE_PORT'] = int(lines[4])
+
 mysql.init_app(app)
 conn = mysql.connect()
 cursor = conn.cursor()
