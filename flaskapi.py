@@ -1,3 +1,4 @@
+#Initialise libraries
 from flask import Flask, render_template
 from flask_restx import Api, Resource, reqparse
 from flaskext.mysql import MySQL
@@ -7,6 +8,9 @@ import json
 app = Flask(__name__)
 api = Api(app)
 
+#This section reads database configs from a txt file "secrets.txt" each 
+#Place each entry in secrets.txt on a new line in the order: database username, database password, database name, database host, database port
+#If error when connected to db ensure there are no space/other characters on each line
 passwordtxt = open("secrets.txt","r")
 password = passwordtxt.read()
 with open('secrets.txt') as passfile:
@@ -19,15 +23,16 @@ app.config['MYSQL_DATABASE_DB'] = lines[2]
 app.config['MYSQL_DATABASE_HOST'] = lines[3]
 app.config['MYSQL_DATABASE_PORT'] = int(lines[4])
 
+#Connect to the database
 mysql.init_app(app)
 conn = mysql.connect()
 cursor = conn.cursor()
+
 
 #UpdateSCCM Args
 update_sccm_args = reqparse.RequestParser()
 update_sccm_args.add_argument('hostname', type=str, help='Hostname of machine to update')
 update_sccm_args.add_argument('updateTimestamp', type=str, help='Last update date (yyyymmdd)')
-
 
 @api.route("/UpdateSCCM")
 class UpdateSCCM(Resource):
@@ -48,6 +53,7 @@ class UpdateSCCM(Resource):
                                 except Exception as e:
                                                 return {'error': str(e)}
 
+                                    
 #Update patch level Args
 update_patch_args = reqparse.RequestParser()
 update_patch_args.add_argument('hostname', type=str, help='Hostname of machine to update')
@@ -76,6 +82,7 @@ class UpdatePatchLevel(Resource):
                                 except Exception as e:
                                                 return {'error': str(e)}
 
+                                    
 #Target patch level Args
 target_patch_args = reqparse.RequestParser()
 target_patch_args.add_argument('BuildVersion', type=str, help='Build version')
@@ -101,6 +108,7 @@ class TargetPatchLevel(Resource):
                                 except Exception as e:
                                                 return {'error': str(e)}
 
+                                    
 #Login Event Args
 login_event_parse = reqparse.RequestParser()
 login_event_parse.add_argument('hostname', type=str, help='Hostname of machine logged into')
@@ -129,6 +137,7 @@ class AddLoginEvent(Resource):
                                 except Exception as e:
                                                 return {'error': str(e)}
 
+                                    
 #List User Logins Args
 list_logins_parse = reqparse.RequestParser()
 list_logins_parse.add_argument('username', type=str, help='Username to list logins')
@@ -163,6 +172,7 @@ class ListUserLogins(Resource):
                                                 return {'error': str(e)}
 
 
+        
 @api.route("/MobileDevices")
 class MobileDevices(Resource):
                 def post(self):
@@ -177,6 +187,7 @@ class MobileDevices(Resource):
                                 except Exception as e:
                                                 return {'error': str(e)}
 
+                                    
 @api.route("/NoCcmDevices")
 class NoCcmDevices(Resource):
                 def post(self):
@@ -238,6 +249,7 @@ class AuditStats(Resource):
                                 except Exception as e:
                                                 return {'error': str(e)}
 
+                                    
 #Update Sophos args
 sophos_args = reqparse.RequestParser()
 sophos_args.add_argument('hostname', type=str, help='Hostname of machine to update')
@@ -262,6 +274,7 @@ class UpdateSophos(Resource):
                                 except Exception as e:
                                                 return {'error': str(e)}
 
+                                    
 #Device_status_args
 device_status_args = reqparse.RequestParser()
 device_status_args.add_argument('hostname', type=str, help='Hostname of machine to update')
@@ -288,5 +301,8 @@ class DeviceStatus(Resource):
                                                 return {'error': str(e)}
 
 
+                              
 if __name__=="__main__":
     app.run(port=8081)
+    #Use below when running on local machine
+    #app.run(host="0.0.0.0",port=8080)
