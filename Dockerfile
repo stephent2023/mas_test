@@ -25,4 +25,4 @@ EXPOSE 8081
 STOPSIGNAL SIGINT
 
 ENTRYPOINT ["python"]
-CMD ["flaskapi.py"]
+CMD ["hellowrldflask.py"]
