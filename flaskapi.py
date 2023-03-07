@@ -4,6 +4,7 @@ from flask_restx import Api, Resource, reqparse
 from flaskext.mysql import MySQL
 from datetime import datetime, timedelta
 import json
+import os
 
 app = Flask(__name__)
 api = Api(app)
@@ -11,17 +12,17 @@ api = Api(app)
 #This section reads database configs from a txt file "secrets.txt" each 
 #Place each entry in secrets.txt on a new line in the order: database username, database password, database name, database host, database port
 #If error when connected to db ensure there are no space/other characters on each line
-passwordtxt = open("secrets.txt","r")
-password = passwordtxt.read()
-with open('secrets.txt') as passfile:
-    lines = [line.rstrip('\n') for line in passfile]
+#passwordtxt = open("secrets.txt","r")
+#password = passwordtxt.read()
+#with open('secrets.txt') as passfile:
+#    lines = [line.rstrip('\n') for line in passfile]
 
 mysql = MySQL()
-app.config['MYSQL_DATABASE_USER'] = lines[0]
-app.config['MYSQL_DATABASE_PASSWORD'] = lines[1]
-app.config['MYSQL_DATABASE_DB'] = lines[2]
-app.config['MYSQL_DATABASE_HOST'] = lines[3]
-app.config['MYSQL_DATABASE_PORT'] = int(lines[4])
+app.config['MYSQL_DATABASE_USER'] = os.environ.get('db-user')
+app.config['MYSQL_DATABASE_PASSWORD'] = os.environ.get('db-pass')
+app.config['MYSQL_DATABASE_DB'] = os.environ.get('db-name')
+app.config['MYSQL_DATABASE_HOST'] = os.environ.get('db-endpoint')
+app.config['MYSQL_DATABASE_PORT'] = os.environ.get('db-port')
 
 #Connect to the database
 mysql.init_app(app)
