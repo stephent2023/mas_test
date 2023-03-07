@@ -303,6 +303,6 @@ class DeviceStatus(Resource):
 
                               
 if __name__=="__main__":
-    app.run(port=8081)
+    #app.run(port=8081)
     #Use below when running on local machine
-    #app.run(host="0.0.0.0",port=8080)
+    app.run(host="0.0.0.0",port=8001)
