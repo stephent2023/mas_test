@@ -1,8 +1,9 @@
 from flask import Flask
+import os
 
 app = Flask(__name__)
 
-print("cool")
+print(os.environ)
 
 @app.route("/")
 def pagehome():
