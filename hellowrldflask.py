@@ -3,7 +3,7 @@ import os
 
 app = Flask(__name__)
 
-print(os.environ('db-name'))
+print(os.environ.get('db-name'))
 print("cool")
 
 @app.route("/")
