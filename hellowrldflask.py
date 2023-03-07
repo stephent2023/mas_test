@@ -4,6 +4,7 @@ import os
 app = Flask(__name__)
 
 print(os.environ)
+print("cool")
 
 @app.route("/")
 def pagehome():
