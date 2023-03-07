@@ -28,9 +28,6 @@ mysql.init_app(app)
 conn = mysql.connect()
 cursor = conn.cursor()
 
-#Test
-print("cool")
-
 #UpdateSCCM Args
 update_sccm_args = reqparse.RequestParser()
 update_sccm_args.add_argument('hostname', type=str, help='Hostname of machine to update')
