@@ -1,4 +1,3 @@
-
 # Inherit python image
 FROM registry.access.redhat.com/ubi9/python-39:latest
 
@@ -24,5 +23,6 @@ ENV PYTHONUNBUFFERED 1
 EXPOSE 8081
 STOPSIGNAL SIGINT
 
+# RUN the python script
 ENTRYPOINT ["python"]
 CMD ["flaskapi.py"]
