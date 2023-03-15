@@ -13,11 +13,11 @@ api = Api(app)
 #Configure DB connection
 #DB info is pulled from secrets in the innershift environment
 mysql = MySQL()
-app.config['MYSQL_DATABASE_USER'] = os.environ.get('db-user')
-app.config['MYSQL_DATABASE_PASSWORD'] = os.environ.get('db-pass')
-app.config['MYSQL_DATABASE_DB'] = os.environ.get('db-name')
-app.config['MYSQL_DATABASE_HOST'] = os.environ.get('db-endpoint')
-app.config['MYSQL_DATABASE_PORT'] = int(os.environ.get('db-port'))
+app.config['MYSQL_DATABASE_USER'] = os.environ.get('DB_USER')
+app.config['MYSQL_DATABASE_PASSWORD'] = os.environ.get('DB_PASS')
+app.config['MYSQL_DATABASE_DB'] = os.environ.get('DB_NAME')
+app.config['MYSQL_DATABASE_HOST'] = os.environ.get('DB_ENDPOINT')
+app.config['MYSQL_DATABASE_PORT'] = int(os.environ.get('DB_PORT'))
 
 #Connect to the database
 mysql.init_app(app)
