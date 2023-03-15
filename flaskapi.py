@@ -9,14 +9,9 @@ import os
 app = Flask(__name__)
 api = Api(app)
 
-#This section reads database configs from a txt file "secrets.txt" each 
-#Place each entry in secrets.txt on a new line in the order: database username, database password, database name, database host, database port
-#If error when connected to db ensure there are no space/other characters on each line
-#passwordtxt = open("secrets.txt","r")
-#password = passwordtxt.read()
-#with open('secrets.txt') as passfile:
-#    lines = [line.rstrip('\n') for line in passfile]
 
+#Configure DB connection
+#DB info is pulled from secrets in the innershift environment
 mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = os.environ.get('db-user')
 app.config['MYSQL_DATABASE_PASSWORD'] = os.environ.get('db-pass')
@@ -303,6 +298,4 @@ class DeviceStatus(Resource):
 
                               
 if __name__=="__main__":
-    #app.run(port=8081)
-    #Use below when running on local machine
     app.run(host="0.0.0.0",port=8001)
