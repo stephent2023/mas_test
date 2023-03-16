@@ -4,30 +4,25 @@ from flask_restx import Api, Resource, reqparse
 from flaskext.mysql import MySQL
 from datetime import datetime, timedelta
 import json
+import os
 
 app = Flask(__name__)
 api = Api(app)
 
-#This section reads database configs from a txt file "secrets.txt" each 
-#Place each entry in secrets.txt on a new line in the order: database username, database password, database name, database host, database port
-#If error when connected to db ensure there are no space/other characters on each line
-passwordtxt = open("secrets.txt","r")
-password = passwordtxt.read()
-with open('secrets.txt') as passfile:
-    lines = [line.rstrip('\n') for line in passfile]
 
+#Configure DB connection
+#DB info is pulled from secrets in the innershift environment
 mysql = MySQL()
-app.config['MYSQL_DATABASE_USER'] = lines[0]
-app.config['MYSQL_DATABASE_PASSWORD'] = lines[1]
-app.config['MYSQL_DATABASE_DB'] = lines[2]
-app.config['MYSQL_DATABASE_HOST'] = lines[3]
-app.config['MYSQL_DATABASE_PORT'] = int(lines[4])
+app.config['MYSQL_DATABASE_USER'] = os.environ.get('DB_USER')
+app.config['MYSQL_DATABASE_PASSWORD'] = os.environ.get('DB_PASS')
+app.config['MYSQL_DATABASE_DB'] = os.environ.get('DB_NAME')
+app.config['MYSQL_DATABASE_HOST'] = os.environ.get('DB_ENDPOINT')
+app.config['MYSQL_DATABASE_PORT'] = int(os.environ.get('DB_PORT'))
 
 #Connect to the database
 mysql.init_app(app)
 conn = mysql.connect()
 cursor = conn.cursor()
-
 
 #UpdateSCCM Args
 update_sccm_args = reqparse.RequestParser()
@@ -303,6 +298,4 @@ class DeviceStatus(Resource):
 
                               
 if __name__=="__main__":
-    app.run(port=8081)
-    #Use below when running on local machine
-    #app.run(host="0.0.0.0",port=8080)
+    app.run(host="0.0.0.0",port=8001)
