@@ -34,7 +34,7 @@ class UpdateSCCM(Resource):
                 @api.doc(parser=update_sccm_args)
                 def post(self):
                                 try:
-                                                lastUpdated = str(datetime.today().strftime("%Y%m%d"))
+                                                lastUpdated = str(datetime.today().strftime('%Y-%m-%d %H:%M:%S'))
                                                 args = update_sccm_args.parse_args()
                                                 hostname = args['hostname']
                                                 updateTimestamp = args['updateTimestamp']
