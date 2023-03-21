@@ -1,1 +1,2 @@
 Flask == 2.2.3
+flask-restx == https://github.com/python-restx/flask-restx
