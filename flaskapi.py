@@ -58,6 +58,29 @@ class AddLoginEvent(Resource):
                                                 return {'error': str(e)}
 
 
+#####AddLogoutEvents#####
+logout_event_parse = reqparse.RequestParser()
+logout_event_parse.add_argument('hostname', type=str, help='Hostname of machine logged into')
+logout_event_parse.add_argument('username', type=str, help='Username of user logging on')
+logout_event_parse.add_argument('timestamp', type=int, help='Unix time of logout event')
+
+@api.route("/AddLogoutEvent")
+class AddlogoutEvent(Resource):
+                @api.doc(parser=logout_event_parse)
+                def post(self):
+                                try:
+                                                args = logout_event_parse.parse_args()
+                                                hostname = args['hostname']
+                                                username = args['username']
+                                                timestamp = args['timestamp']
+                                                sql = "UPDATE Loginevents SET LogoutTimestamp = FROM_UNIXTIME('" + str(timestamp) +"') WHERE (Hostname = '" + hostname + "') AND (Username = '" + username + "') order by timestamp desc limit 1;"
+                                                cursor.execute(sql)
+                                                conn.commit()
+                                                return {'Hostname': hostname, 'Username': username, 'LogoutTimestamp': str(timestamp)}
+                                except Exception as e:
+                                                return {'error': str(e)}
+                              
+                              
 #####AuditStats#####
 #Returns number of devices that haven't check into SCCM Sophos or reported Audit data and desktops that haven;t been seen for 7 days
 @api.route("/AuditStats")
