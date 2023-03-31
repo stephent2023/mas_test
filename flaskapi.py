@@ -17,7 +17,7 @@ app.config['MYSQL_DATABASE_USER'] = os.environ.get('DB_USER')
 app.config['MYSQL_DATABASE_PASSWORD'] = os.environ.get('DB_PASS')
 app.config['MYSQL_DATABASE_DB'] = os.environ.get('DB_NAME')
 app.config['MYSQL_DATABASE_HOST'] = os.environ.get('DB_ENDPOINT')
-app.config['MYSQL_DATABASE_PORT'] = int(os.environ.get('DB_PORT'))
+app.config['MYSQL_DATABASE_PORT'] = 3306
 
 #Connect to the database
 mysql.init_app(app)
