@@ -10,5 +10,5 @@ oc expose service/api --port=8001
 
 The API needs environmental variables to connect to the DB, named as follows:
 ```
-DB_USER       DB_PASS       DB_NAME       DB_ENDPOINT       DB_PORT
+DB_USER       DB_PASS       DB_NAME       DB_ENDPOINT
 ```
